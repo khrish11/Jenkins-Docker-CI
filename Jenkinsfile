@@ -20,19 +20,18 @@ stage('2. Application Build & Test') {
     }
 }
 
-       stage('3. Build & Tag Docker Image') {
+  stage('3. Build & Tag Docker Image') {
     steps {
-        bat '"C:\\Users\\STUDENT\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" build -t localhost:5000/abh-app:5 -t localhost:5000/abh-app:latest .'
+        bat '"C:\\Users\\STUDENT\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" --version'
+        bat '"C:\\Users\\STUDENT\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" build -t localhost:5000/abh-app:6 -t localhost:5000/abh-app:latest .'
     }
 }
-
-    stage('4. Push Image to Registry') {
+ stage('4. Push Image to Registry') {
     steps {
-        bat '"C:\\Users\\STUDENT\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" push localhost:5000/abh-app:5'
+        bat '"C:\\Users\\STUDENT\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" push localhost:5000/abh-app:6'
         bat '"C:\\Users\\STUDENT\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" push localhost:5000/abh-app:latest'
     }
 }
-
     post {
         success {
             echo "Pipeline succeeded! Image ${REGISTRY}/${IMAGE_NAME}:${BUILD_NUMBER} is available locally and in the registry."
