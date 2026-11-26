@@ -20,16 +20,24 @@ stage('2. Application Build & Test') {
     }
 }
 
-  stage('3. Build & Tag Docker Image') {
+stage('3. Build & Tag Docker Image') {
     steps {
-        bat '"C:\\Users\\STUDENT\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" --version'
-        bat '"C:\\Users\\STUDENT\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" build -t localhost:5000/abh-app:6 -t localhost:5000/abh-app:latest .'
+        script {
+            def dockerPath = 'C:\\Users\\STUDENT\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe'
+
+            bat "\"${dockerPath}\" --version"
+            bat "\"${dockerPath}\" build -t localhost:5000/abh-app:7 -t localhost:5000/abh-app:latest ."
+        }
     }
 }
- stage('4. Push Image to Registry') {
+stage('4. Push Image to Registry') {
     steps {
-        bat '"C:\\Users\\STUDENT\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" push localhost:5000/abh-app:6'
-        bat '"C:\\Users\\STUDENT\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" push localhost:5000/abh-app:latest'
+        script {
+            def dockerPath = 'C:\\Users\\STUDENT\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe'
+
+            bat "\"${dockerPath}\" push localhost:5000/abh-app:7"
+            bat "\"${dockerPath}\" push localhost:5000/abh-app:latest"
+        }
     }
 }
     post {
