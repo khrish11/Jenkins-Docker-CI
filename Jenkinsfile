@@ -20,19 +20,18 @@ stage('2. Application Build & Test') {
     }
 }
 
-        stage('3. Build & Tag Docker Image') {
-            steps {
-                bat "docker build -t ${REGISTRY}/${IMAGE_NAME}:${BUILD_NUMBER} -t ${REGISTRY}/${IMAGE_NAME}:latest ."
-            }
-        }
-
-        stage('4. Push Image to Registry') {
-            steps {
-                bat "docker push ${REGISTRY}/${IMAGE_NAME}:${BUILD_NUMBER}"
-                bat "docker push ${REGISTRY}/${IMAGE_NAME}:latest"
-            }
-        }
+       stage('3. Build & Tag Docker Image') {
+    steps {
+        bat '"C:\\Users\\STUDENT\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" build -t localhost:5000/abh-app:5 -t localhost:5000/abh-app:latest .'
     }
+}
+
+    stage('4. Push Image to Registry') {
+    steps {
+        bat '"C:\\Users\\STUDENT\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" push localhost:5000/abh-app:5'
+        bat '"C:\\Users\\STUDENT\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" push localhost:5000/abh-app:latest'
+    }
+}
 
     post {
         success {
