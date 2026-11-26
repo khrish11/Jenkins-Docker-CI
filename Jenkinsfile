@@ -13,11 +13,11 @@ pipeline {
             }
         }
 
-        stage('2. Application Build & Test') {
-            steps {
-                bat 'python app.py'
-            }
-        }
+    stage('2. Application Build & Test') {
+    steps {
+        bat '"C:\\Users\\STUDENT\\AppData\\Local\\Programs\\Python\\Python313\\python.exe" app.py'
+    }
+}
 
         stage('3. Build & Tag Docker Image') {
             steps {
