@@ -19,19 +19,19 @@ pipeline {
     }
 }
 
-        stage('3. Build & Tag Docker Image') {
-            steps {
-                bat "docker build -t ${REGISTRY}/${IMAGE_NAME}:${BUILD_NUMBER} -t ${REGISTRY}/${IMAGE_NAME}:latest ."
-            }
-        }
-
-        stage('4. Push Image to Registry') {
-            steps {
-                bat "docker push ${REGISTRY}/${IMAGE_NAME}:${BUILD_NUMBER}"
-                bat "docker push ${REGISTRY}/${IMAGE_NAME}:latest"
-            }
-        }
+    stage('3. Build & Tag Docker Image') {
+    steps {
+        bat "\"${DOCKER}\" version"
+        bat "\"${DOCKER}\" build -t ${REGISTRY}/${IMAGE_NAME}:${BUILD_NUMBER} -t ${REGISTRY}/${IMAGE_NAME}:latest ."
     }
+}
+
+    stage('4. Push Image to Registry') {
+    steps {
+        bat "\"${DOCKER}\" push ${REGISTRY}/${IMAGE_NAME}:${BUILD_NUMBER}"
+        bat "\"${DOCKER}\" push ${REGISTRY}/${IMAGE_NAME}:latest"
+    }
+}
 
     post {
         success {
